@@ -74,14 +74,16 @@ namespace ConsumerTests
         }
 
         [Fact]
-        public async void When_PingIt_Then_ReceiveMessageAsync()
+        public async void When_PingItInTest_Then_ReceiveMessageAsync()
         {
             // Arrange
             IPingService sut = new PingNothing();
             Settings settings = new() {
                 PingPort = 0,
                 Pause = 0,
-                DeploymentStatus = "Test"
+                DeploymentStatus = "Test",
+                URL = null,
+                CallDestination = null
             };
 
             // Act
