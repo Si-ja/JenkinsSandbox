@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using InfinitePing.Models;
 using InfinitePing.Services;
 using System.Threading.Tasks;
+using System.Reflection;
 
 namespace InfinitePing
 {
@@ -13,7 +14,7 @@ namespace InfinitePing
         {
             // Perform a setup with required in the future parameters and conditions
             var config = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
+                .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
                 .AddJsonFile(ConfigurationReferences.AppSettings, optional: false)
                 .Build();
 
