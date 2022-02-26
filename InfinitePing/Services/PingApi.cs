@@ -1,7 +1,7 @@
 ﻿using InfinitePing.Models;
-using System;
 using System.IO;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace InfinitePing.Services
@@ -14,13 +14,14 @@ namespace InfinitePing.Services
             await Task.Delay(settings.Pause);
 
             // Prepare the objects that can retrieve information from the web
-            WebRequest wrGETURL;
+            HttpClientHandler clientHandler = new();
+            clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+            HttpClient client = new(clientHandler);
             Stream objStream;
 
             // Initiate stream retrieval
-            wrGETURL = WebRequest.Create(settings.FullURL);
-            WebResponse response = await wrGETURL.GetResponseAsync();
-            objStream = response.GetResponseStream();
+            HttpResponseMessage response = await client.GetAsync(settings.FullURL);
+            objStream = response.Content.ReadAsStream();
 
             StreamReader reader = new(objStream);
             string text = reader.ReadToEnd();
