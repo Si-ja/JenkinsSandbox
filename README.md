@@ -11,3 +11,7 @@ Both services have their own sets of very simple unit tests that can be ran to v
 ## The Jenkins concept
 
 The idea is to be able to use this simple setup with two utmost basic services and try to deploy them via Jenkins. That's pretty much it. Jenkins should be able to connect to GitHub, get the projects, build them, test, deploy on a VM service that runs Linux. If operationability of the code changes, Jenkins should be able to delete the old project and produce a new build. That's it.
+
+## Notice
+
+The project has a very simple structure for the code, where no `try-catch` conditions are used, as well as there are almost no clauses for dealing with potential errors or absence of connections if one service goes down. The idea was just to experiment with Jenkins having 2 projects operational with their own sets of tests. Configs for pipelines that were used for Jenkins can be found in the `JenkinsBuilds`. 
